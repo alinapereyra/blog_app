@@ -11,13 +11,15 @@ import { PostService } from '../post.service';
 export class PostListComponent implements OnInit {
   posts: Post[] = [];
 
-  constructor(public postService: PostService) {}
+  constructor(public postService: PostService) {
+    this.postService.getPosts().subscribe((res) => {
+      this.posts = res;
+    })
+  }
 
   ngOnInit() {
-    this.posts = this.postService.getPosts();
-    this.postService.getPostUpdateListener()
-      .subscribe((posts: Post[]) => {
-        this.posts = posts;
-      });
+
   }
+
+
 }

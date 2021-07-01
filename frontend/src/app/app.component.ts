@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
-import { ApiDataService } from
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',

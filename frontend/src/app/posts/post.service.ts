@@ -1,49 +1,36 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { Post } from './post.model';
 
 @Injectable({providedIn: 'root'})
 export class PostService {
-  private posts: Post[] = [];
-  private postsUpdated = new Subject<Post[]>();
 
-  getPosts() {
-    return [...this.posts];
+  ROOT_URL = 'http://localhost:3000';
+
+  constructor(private http: HttpClient) {
   }
 
-  getPostUpdateListener() {
-    return this.postsUpdated.asObservable();
-  }
 
+  /*
+    Post request to add blog.
+  */
   addPost(title: string, author: string, content: string) {
-    const post: Post = { title: title, author: author, content: content };
-    this.posts.push(post);
-    this.postsUpdated.next([...this.posts]);
+    console.log("frontend works!");
+    return this.http.post(`${this.ROOT_URL}/addBlog`, {title, author, content});
+  }
+
+  /*
+    Get request to search for blog.
+  */
+  findPost(title: string, author: string, content: string) {
+  }
+
+  /*
+    Returns all blogs.
+  */
+  getPosts(): Observable<any> {
+    return this.http.get(`${this.ROOT_URL}/getBlogs`);
   }
 }
-
-// import { Injectable } from '@angular/core';
-// import { BehaviorSubject, Subject } from 'rxjs';
-// import { HttpClient } from '@angular/common/http';
-// import { Router } from '@angular/router';
-
-// const baseUrl = ''
-
-// import { Post } from './post.model';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class PostService {
-
-//   private posts = new BehaviorSubject([]);
-//   public postsObs = this.posts.asObservable();
-
-//   constructor(
-//     public http: HttpClient
-//   ) { }
-
-//   pullPosts() {
-//     return this.http.get('${baseUrl}/')
-//   }

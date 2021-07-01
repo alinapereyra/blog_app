@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const { addBlog, getBlog } = require('../controls/app');
+// const { addBlog, getBlog } = require('../controls/app');
 
-router.post('/addBlog', addBlog); // Add Blog POST Route //
-router.get('/getBlog', getBlog); // Get Blog GET Route //
+// router.post('/addBlog', addBlog); // Add Blog POST Route //
+// router.get('/getBlog', getBlog); // Get Blog GET Route //
 
-module.exports = router;
+// module.exports = router;
 
 // Get All Posts
 router.get('/api/post', (req, res) => {

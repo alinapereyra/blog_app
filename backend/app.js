@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const Post = require('../models/post');
+const { Post } = require('./models/posts');
 
 
 const MongoClient = require('mongodb');
@@ -29,21 +29,34 @@ app.get('/addBlog', function(req,res){
     res.sendFile(__dirname + "/public/index.html");
 });
 
+app.get('/', function(req, res) {
+    res.send("Hi");
+})
+
 // we are referencing db and looking for a collection called blogs
 // in this folder, we are inserting an object
 // object has title and content
 app.post('/addBlog', function(req,res){
     db.collection("posts").insertOne({
-        title: "titleValue",
-        author: "authorValue",
-        content: "contentValue"
+        title: req.body.title,
+        author: req.body.author,
+        content: req.body.content
     // if there is an error, it will throw you an error
     },function(error,result){
         if(error) throw error;
     // if there is no error, you will be sent a message
+        console.log("yay!");
         res.send("blog added successfully");
     })
 });
+
+app.get('/getBlogs', (req, res) => {
+    db.collection("posts").find().toArray(function(err, result) {
+        console.log(result);
+        res.send(result);
+      })
+});
+
 app.get('/getBlogs', function(req,res){
     db.collection('posts').find({}).toArray(function(error,documents){
         if (error) throw error;

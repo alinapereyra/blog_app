@@ -22,3 +22,28 @@ export class PostService {
     this.postsUpdated.next([...this.posts]);
   }
 }
+
+// import { Injectable } from '@angular/core';
+// import { BehaviorSubject, Subject } from 'rxjs';
+// import { HttpClient } from '@angular/common/http';
+// import { Router } from '@angular/router';
+
+// const baseUrl = ''
+
+// import { Post } from './post.model';
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class PostService {
+
+//   private posts = new BehaviorSubject([]);
+//   public postsObs = this.posts.asObservable();
+
+//   constructor(
+//     public http: HttpClient
+//   ) { }
+
+//   pullPosts() {
+//     return this.http.get('${baseUrl}/')
+//   }

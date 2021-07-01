@@ -1,7 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const { Post } = require('../models/post');
+const { addBlog, getBlog } = require('../controls/app');
+
+router.post('/addBlog', addBlog); // Add Blog POST Route //
+router.get('/getBlog', getBlog); // Get Blog GET Route //
+
+module.exports = router;
 
 // Get All Posts
 router.get('/api/post', (req, res) => {
@@ -43,21 +48,21 @@ router.get('/api/post/:id', (req, res) => {
     });
 });
 
-// // Update Employee
+// Update Employee
 
-// router.put('/api/post/edit/:id', (req, res) => {
-//     const emp = {
-//         title: req.body.title,
-//         author: req.body.author,
-//         content: req.body.content
-//     };
-//     Post.findByIdAndUpdate(req.params.id, { $set: emp }, { new: true }, (err, data) => {
-//         if(!err) {
-//             res.status(200).json({code: 200, message: 'Post Updated Successfully', updatePost: data})
-//         } else {
-//             console.log(err);
-//         }
-//     });
-// });
+router.put('/api/post/edit/:id', (req, res) => {
+    const emp = {
+        title: req.body.title,
+        author: req.body.author,
+        content: req.body.content
+    };
+    Post.findByIdAndUpdate(req.params.id, { $set: emp }, { new: true }, (err, data) => {
+        if(!err) {
+            res.status(200).json({code: 200, message: 'Post Updated Successfully', updatePost: data})
+        } else {
+            console.log(err);
+        }
+    });
+});
 
 module.exports = router;

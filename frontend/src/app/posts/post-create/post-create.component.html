@@ -1,5 +1,5 @@
 <mat-card>
-  <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+  <form (submit)="onAddPost(postForm)" #postForm="ngForm" method="POST">
     <mat-form-field>
       <input
         matInput
@@ -37,6 +37,7 @@
       <mat-error *ngIf="content.invalid">Please enter content in blog post.</mat-error>
     </mat-form-field>
     <button
+      value="submit"
       color="primary"
       mat-raised-button
       type="submit">Save Post
